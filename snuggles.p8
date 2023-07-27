@@ -3,7 +3,7 @@ version 41
 __lua__
 #include color_wipe.lua
 #include fancy_text.lua
-
+#include basket.lua
 #include attention_span.lua
 #include title_scene.lua
 #include game_scene.lua

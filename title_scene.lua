@@ -14,8 +14,7 @@ title_scene = {
             self.x_pressed = true
             local function callback()
                 self.x_pressed = false
-                scene = game_scene
-                scene:init()
+                scene = make_level(3, 1)
             end
             color_wipe:wipe_in(callback)
         end

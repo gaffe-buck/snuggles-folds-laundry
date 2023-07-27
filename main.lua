@@ -8,5 +8,5 @@ function _update60()
 end
 
 function _draw()
-    scene.draw()
+    scene:draw()
 end

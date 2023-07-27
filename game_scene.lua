@@ -1,33 +1,38 @@
-game_scene = {
-    init = function ()
-        attention_span = make_attention_span()
-        local wipe_out_callback = function()
-            attention_span:show(attention_span.activate)
-        end
-        color_wipe:wipe_out(wipe_out_callback)
-    end,
-    
-    update = function(self)
-        attention_span:update()
-        color_wipe:update()
-    end,
+LEVEL_BACKGROUND_COLOR = 7
 
-    draw = function()
-        cls(7)
+function make_level(num_clothes, num_folds)
+    local level = {}
+    level.update = _level_update
+    level.draw = _level_draw
+    level.attention_span = make_attention_span()
+    level.basket = make_basket()
 
-        fancy_text({
-            text = "game scene!",
-            text_colors = { 8 },
-            background_color = 7,
-            bubble_depth = 2,
-            x = 18,
-            y = 8,
-            outline_color = 0,
-            letter_width = 9,
-            big = true
-        })
+    color_wipe:wipe_out(make_level_wipe_out_callback(level))
 
-        attention_span:draw()
-        color_wipe:draw()
+    return level
+end
+
+function make_level_wipe_out_callback(level)
+    local attention_span_show_callback = function()
+        level.attention_span:activate()
     end
-}
+
+    return function()
+        level.attention_span:show(attention_span_show_callback)
+        --level.basket:show()
+    end
+end
+
+function _level_update(level)
+    level.basket:update()
+    level.attention_span:update()
+    color_wipe:update()
+end
+
+function _level_draw(level)
+    cls(LEVEL_BACKGROUND_COLOR)
+
+    if level.basket then level.basket:draw() end
+    level.attention_span:draw()
+    color_wipe:draw()
+end
