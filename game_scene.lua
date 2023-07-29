@@ -2,6 +2,8 @@ LEVEL_BACKGROUND_COLOR = 15
 
 function make_level(num_clothes, num_folds)
     local level = {}
+    level.state = make_game_state(num_clothes, num_folds)
+
     level.update = _level_update
     level.draw = _level_draw
     level.attention_span = make_attention_span()
