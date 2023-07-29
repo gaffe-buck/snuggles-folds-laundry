@@ -1,6 +1,6 @@
 BASKET_SHOW_START_X = 64-16
-BASKET_SHOW_START_Y = 128+16
-BASKET_SHOW_END_Y = 128-40 
+BASKET_SHOW_START_Y = 0-16
+BASKET_SHOW_END_Y = 128-32 
 
 function make_basket()
     local basket = {}
@@ -18,11 +18,11 @@ end
 function _basket_show(basket)
     local tween_config = {
         target = basket,
-        delay = seconds_to_frames(1),
-        duration = seconds_to_frames(0.5),
-        start_x = BASKET_SHOW_START_X,
+        duration = seconds_to_frames(1),
+        easing = EASING_FUNCTIONS.EASE_OUT_BOUNCE,
         start_y = BASKET_SHOW_START_Y,
-        end_y = BASKET_SHOW_END_Y
+        end_y = BASKET_SHOW_END_Y,
+        -- callback!
     }
 
     local tween = make_translation_tween(tween_config)

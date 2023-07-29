@@ -4,8 +4,7 @@ function make_translation_tween(config)
     assert(config.target.x, "object has no x prop")
     assert(config.target.y, "object has no y prop")
     assert(config.duration, "no duration specified")
-    assert(config.start_x, "no start x specified")
-    assert(config.start_y, "no start y specified")
+
     assert(config.duration > 1)
 
     tween.target = config.target
@@ -16,21 +15,34 @@ function make_translation_tween(config)
     tween.end_x = config.end_x or config.start_x
     tween.end_y = config.end_y or config.start_y
     tween.easing = config.easing or EASING_FUNCTIONS.LINEAR
-    tween.update = _tween_update
+    tween.callback = config.callback
     
     tween.frames = 0
+    tween.called_back = false
+
+    tween.update = _tween_update
     
     return tween
 end
 
 function _tween_update(tween)
-    if tween.frames > tween.delay + tween.duration then return false end
+    if tween.frames > tween.delay + tween.duration then 
+        if tween.callback and not tween.called_back then 
+            tween.callback()
+            tween.called_back = true
+        end
+        return false 
+    end
 
     local absolute_progress = _tween_get_progress(tween)
     local eased_progress = tween.easing(absolute_progress)
 
-    tween.target.x = _tween_calc(tween.start_x, tween.end_x, eased_progress)
-    tween.target.y = _tween_calc(tween.start_y, tween.end_y, eased_progress)
+    if tween.start_x then
+        tween.target.x = _tween_calc(tween.start_x, tween.end_x, eased_progress)
+    end
+    if tween.start_y then
+        tween.target.y = _tween_calc(tween.start_y, tween.end_y, eased_progress)
+    end
 
     tween.frames += 1
     return true
