@@ -1,12 +1,11 @@
 function _init()
-    scene = title_scene
-    scene.init()
+    g_scene = make_level(3, 1) --make_title_scene()
 end
 
 function _update60()
-    scene:update()
+    g_scene:update()
 end
 
 function _draw()
-    scene:draw()
+    g_scene:draw()
 end

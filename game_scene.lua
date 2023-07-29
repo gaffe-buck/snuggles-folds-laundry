@@ -1,4 +1,4 @@
-LEVEL_BACKGROUND_COLOR = 7
+LEVEL_BACKGROUND_COLOR = 15
 
 function make_level(num_clothes, num_folds)
     local level = {}
@@ -6,8 +6,9 @@ function make_level(num_clothes, num_folds)
     level.draw = _level_draw
     level.attention_span = make_attention_span()
     level.basket = make_basket()
+    level.color_wipe = make_rainbow_wipe()
 
-    color_wipe:wipe_out(make_level_wipe_out_callback(level))
+    level.color_wipe:wipe_out(make_level_wipe_out_callback(level))
 
     return level
 end
@@ -19,14 +20,14 @@ function make_level_wipe_out_callback(level)
 
     return function()
         level.attention_span:show(attention_span_show_callback)
-        --level.basket:show()
+        level.basket:show()
     end
 end
 
 function _level_update(level)
     level.basket:update()
     level.attention_span:update()
-    color_wipe:update()
+    level.color_wipe:update()
 end
 
 function _level_draw(level)
@@ -34,5 +35,5 @@ function _level_draw(level)
 
     if level.basket then level.basket:draw() end
     level.attention_span:draw()
-    color_wipe:draw()
+    level.color_wipe:draw()
 end
