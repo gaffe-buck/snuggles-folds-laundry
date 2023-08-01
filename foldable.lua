@@ -1,4 +1,6 @@
 FOLDABLE_SCREEN_HEIGHT = 56
+FOLDABLE_DEFAULT_X = 36
+FOLDABLE_DEFAULT_Y = 36
 
 FOLDABLE_LEFT_SCREEN_X_OFFSET = 0
 FOLDABLE_LEFT_SCREEN_Y_OFFSET = 0
@@ -52,8 +54,8 @@ function make_foldable(article)
     foldable.draw = _foldable_draw
 
     foldable.article = article
-    foldable.x = 64 - (56/2)
-    foldable.y = 64 - (56/2)
+    foldable.x = FOLDABLE_DEFAULT_X
+    foldable.y = FOLDABLE_DEFAULT_Y
 
     return foldable
 end
@@ -62,14 +64,19 @@ function _foldable_update(foldable)
     return
 end
 
-function _foldable_draw(foldable)
+function _foldable_draw_background()
     circfill(64, 64, 48, 7)
     fillp(FILLP_LOOSE_CHECKER)
     circfill(64, 64, 48, 15)
     fillp()
+end
 
-    local outline_color = foldable.article.colors[1].color
-    local outline_color = outline_color == LAUNDRY.COLORS.WHITE and foldable.article.colors[2].color or outline_color
+function _foldable_draw(foldable)
+    _foldable_draw_background()
+
+    local outline_color = foldable.article.colors[1].color == LAUNDRY.COLORS.WHITE 
+        and foldable.article.colors[2].color 
+        or foldable.article.colors[1].color
     pal_all(outline_color)
     for i in all({{x = 1, y = 0},{x = -1, y = 0},{x = 0, y = 1},{x = 0, y = -1}}) do
         sspr(foldable.article.sprite.x + FOLDABLE_LEFT_SPRITE_X_OFFSET, 
