@@ -133,6 +133,7 @@ LAUNDRY.ARTICLES = {
     },
     {
         sprite = LAUNDRY.ARTICLE_SPRITES.OVERALLS,
+        has_logo = true,
         colors = {
             {
                 default = LAUNDRY.COLORS.NAVY,
@@ -244,6 +245,7 @@ LAUNDRY.ARTICLES = {
     },
     {
         sprite = LAUNDRY.ARTICLE_SPRITES.SKIRT,
+        has_logo = true,
         colors = {
             {
                 default = LAUNDRY.COLORS.PINK,

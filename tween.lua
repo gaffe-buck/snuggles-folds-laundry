@@ -1,11 +1,28 @@
+function make_simple_tween(config)
+    local tween = {}
+    assert(config.duration, "no duration specified")
+    assert(config.duration > 1, "duration must be greater than 1 frame")
+    
+    tween.delay = config.delay or 0
+    tween.duration = config.duration
+    tween.easing = config.easing or EASING_FUNCTIONS.LINEAR
+    tween.callback = config.callback
+
+    tween.frames = 0
+    tween.called_back = false
+
+    tween.update = _tween_simple_update
+
+    return tween
+end
+
 function make_translation_tween(config)
     local tween = {}
     assert(config.target, "no object to tween")
     assert(config.target.x, "object has no x prop")
     assert(config.target.y, "object has no y prop")
     assert(config.duration, "no duration specified")
-
-    assert(config.duration > 1)
+    assert(config.duration > 1, "duration must be greater than 1 frame")
 
     tween.target = config.target
     tween.delay = config.delay or 0
@@ -20,12 +37,28 @@ function make_translation_tween(config)
     tween.frames = 0
     tween.called_back = false
 
-    tween.update = _tween_update
+    tween.update = _tween_translation_update
     
     return tween
 end
 
-function _tween_update(tween)
+function _tween_simple_update(tween)
+    if tween.frames > tween.delay + tween.duration then 
+        if tween.callback and not tween.called_back then 
+            tween.callback()
+            tween.called_back = true
+        end
+        return 1
+    end
+
+    local absolute_progress = _tween_get_progress(tween)
+    local eased_progress = tween.easing(absolute_progress)
+
+    tween.frames += 1
+    return eased_progress
+end
+
+function _tween_translation_update(tween)
     if tween.frames > tween.delay + tween.duration then 
         if tween.callback and not tween.called_back then 
             tween.callback()

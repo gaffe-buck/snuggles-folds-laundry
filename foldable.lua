@@ -1,6 +1,7 @@
 FOLDABLE_SCREEN_HEIGHT = 56
-FOLDABLE_DEFAULT_X = 36
-FOLDABLE_DEFAULT_Y = 36
+FOLDABLE_START_X = 36
+FOLDABLE_START_Y = -64
+FOLDABLE_END_Y = 36
 
 FOLDABLE_LEFT_SCREEN_X_OFFSET = 0
 FOLDABLE_LEFT_SCREEN_Y_OFFSET = 0
@@ -58,10 +59,19 @@ function make_foldable(article)
     local foldable = {}
     foldable.update = _foldable_update
     foldable.draw = _foldable_draw
+    foldable.show = _foldable_show
+    foldable.hide = _foldable_hide
+    foldable.fold = _foldable_fold
 
     foldable.article = article
-    foldable.x = FOLDABLE_DEFAULT_X
-    foldable.y = FOLDABLE_DEFAULT_Y
+    foldable.x = FOLDABLE_START_X
+    foldable.y = FOLDABLE_START_Y
+    foldable.unfolded = {
+        FOLDABLE_SIDE_LEFT,
+        FOLDABLE_SIDE_RIGHT,
+        FOLDABLE_SIDE_TOP,
+        FOLDABLE_SIDE_BOTTOM
+    }
     foldable.folds = {
         [FOLDABLE_SIDE_LEFT] = 0,
         [FOLDABLE_SIDE_RIGHT] = 0,
@@ -69,23 +79,68 @@ function make_foldable(article)
         [FOLDABLE_SIDE_BOTTOM] = 0,
         [FOLDABLE_SIDE_CENTER] = 0
     }
+    foldable.translation_tween = nil
+    foldable.fold_tweens = {}
 
     return foldable
 end
 
 function _foldable_update(foldable)
-    return
+    if foldable.translation_tween then
+        local alive = foldable.translation_tween:update()
+        if not alive then foldable.translation_tween = nil end
+    end
+    if #foldable.fold_tweens > 0 then
+        foldable.fold_tweens[1]:update()
+    end
 end
 
-function _foldable_draw_background()
-    circfill(64, 64, 48, 7)
-    fillp(FILLP_LOOSE_CHECKER)
-    circfill(64, 64, 48, 15)
-    fillp()
+function _foldable_fold(foldable)
+    if #foldable.unfolded < 1 then return end
+    local fold_tween = {}
+    fold_tween.side = foldable.unfolded[1]
+    fold_tween.tween = make_simple_tween({
+        duration = seconds_to_frames(0.12),
+        easing = EASING_FUNCTIONS.EASE_OUT_IN_QUAD,
+        callback = function() del(foldable.fold_tweens, fold_tween) end
+    })
+    fold_tween.update = function(self)
+        local progress = self.tween:update()
+        foldable.folds[self.side] = progress
+
+        return progress
+    end
+    del(foldable.unfolded, foldable.unfolded[1])
+    add(foldable.fold_tweens, fold_tween)
+end
+
+function _foldable_show(foldable)
+    local tween_config = {
+        target = foldable,
+        duration = seconds_to_frames(0.5),
+        easing = EASING_FUNCTIONS.EASE_OUT_BOUNCE,
+        start_y = FOLDABLE_START_Y,
+        end_y = FOLDABLE_END_Y,
+        -- callback!
+    }
+
+    foldable.translation_tween = make_translation_tween(tween_config)
+end
+
+function _foldable_hide(foldable)
+    local tween_config = {
+        target = foldable,
+        duration = seconds_to_frames(0.25),
+        easing = EASING_FUNCTIONS.EASE_IN_OVERSHOOT,
+        start_y = FOLDABLE_END_Y,
+        end_y = FOLDABLE_START_Y,
+        -- callback!
+    }
+
+    foldable.translation_tween = make_translation_tween(tween_config)
 end
 
 function _foldable_draw(foldable)
-    _foldable_draw_background()
     _foldable_draw_outline(foldable)
     _foldable_draw_article(foldable)
 end
@@ -205,7 +260,7 @@ end
 
 function _foldable_get_screen_x_offset(side, folded)
     if side == FOLDABLE_SIDE_LEFT then
-        return FOLDABLE_LEFT_SCREEN_X_OFFSET
+        return ceil(_tween_calc(FOLDABLE_LEFT_SCREEN_X_OFFSET, FOLDABLE_CENTER_SCREEN_X_OFFSET, folded))
     elseif side == FOLDABLE_SIDE_RIGHT then
         return FOLDABLE_RIGHT_SCREEN_X_OFFSET
     elseif side == FOLDABLE_SIDE_TOP then
@@ -223,7 +278,7 @@ function _foldable_get_screen_y_offset(side, folded)
     elseif side == FOLDABLE_SIDE_RIGHT then
         return FOLDABLE_RIGHT_SCREEN_Y_OFFSET
     elseif side == FOLDABLE_SIDE_TOP then
-        return FOLDABLE_TOP_SCREEN_Y_OFFSET
+        return ceil(_tween_calc(FOLDABLE_TOP_SCREEN_Y_OFFSET, FOLDABLE_CENTER_SCREEN_Y_OFFSET, folded))
     elseif side == FOLDABLE_SIDE_BOTTOM then
         return FOLDABLE_BOTTOM_SCREEN_Y_OFFSET
     elseif side == FOLDABLE_SIDE_CENTER then
@@ -233,9 +288,9 @@ end
 
 function _foldable_get_screen_width(side, folded)
     if side == FOLDABLE_SIDE_LEFT then
-        return FOLDABLE_LEFT_SCREEN_WIDTH
+        return FOLDABLE_LEFT_SCREEN_WIDTH * (1 - folded)
     elseif side == FOLDABLE_SIDE_RIGHT then
-        return FOLDABLE_RIGHT_SCREEN_WIDTH
+        return FOLDABLE_RIGHT_SCREEN_WIDTH * (1 - folded)
     elseif side == FOLDABLE_SIDE_TOP then
         return FOLDABLE_TOP_SCREEN_WIDTH
     elseif side == FOLDABLE_SIDE_BOTTOM then
@@ -251,9 +306,9 @@ function _foldable_get_screen_height(side, folded)
     elseif side == FOLDABLE_SIDE_RIGHT then
         return FOLDABLE_SCREEN_HEIGHT
     elseif side == FOLDABLE_SIDE_TOP then
-        return FOLDABLE_TOP_SCREEN_HEIGHT
+        return FOLDABLE_TOP_SCREEN_HEIGHT * (1 - folded)
     elseif side == FOLDABLE_SIDE_BOTTOM then
-        return FOLDABLE_BOTTOM_SCREEN_HEIGHT
+        return FOLDABLE_BOTTOM_SCREEN_HEIGHT  * (1 - folded)
     elseif side == FOLDABLE_SIDE_CENTER then
         return FOLDABLE_CENTER_SCREEN_HEIGHT
     end

@@ -7,35 +7,34 @@ function make_laundry_test_scene()
     scene.randomizer = LAUNDRY.make_randomizer()
     scene.foldables = {}
     scene.cooldown = t() + TEST_COOLDOWN
-    local article = scene.randomizer:get_random_article()
-    local foldable = make_foldable(article)
-    add(scene.foldables, foldable)
 
+    local article = scene.randomizer:get_random_article()
+    scene.foldable = make_foldable(article)
+    
     return scene
 end
 
 function _test_update(scene)
     if btnp(❎) then
         local article = scene.randomizer:get_random_article()
-        local foldable = make_foldable(article)
-        scene.foldables = { foldable }
+        scene.foldable = make_foldable(article)
+        scene.foldable:show()
+    end
+    if btnp(🅾️) then
+        scene.foldable:hide()
+    end
+    if btnp(⬅️) then
+        scene.foldable:fold()
     end
 
-    -- if t() > scene.cooldown then
-    --     _test_create_clothes(scene)
-    -- end
-    if #scene.foldables > 0 then
-        for foldable in all(scene.foldables) do
-            foldable:update()
-        end
-    end
+    scene.foldable:update()
 end
 
 function _test_draw(scene)
     cls(15)
-    if #scene.foldables > 0 then
-        for foldable in all(scene.foldables) do
-            foldable:draw()
-        end
-    end
+    circfill(64, 64, 48, 7)
+    fillp(FILLP_LOOSE_CHECKER)
+    circfill(64, 64, 48, 15)
+    fillp()
+    scene.foldable:draw()
 end
