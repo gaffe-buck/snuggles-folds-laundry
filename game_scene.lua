@@ -9,6 +9,7 @@ function make_level(num_foldables, difficulty)
     level.draw = _level_draw
     level.attention_span = make_attention_span()
     level.basket = make_basket()
+    level.dresser = make_dresser()
     level.color_wipe = make_rainbow_wipe()
 
     level.color_wipe:wipe_out(_level_wipe_out_callback(level))
@@ -46,8 +47,11 @@ function _level_then_load_basket(level)
         or foldable.article.colors[1].color
         add(crumple_colors, color)
     end
+    function then_show_dresser()
+       level.dresser:show() 
+    end
     function then_skootch_basket()
-        level.basket:skootch(function() printh("skootched!") end)
+        level.basket:skootch(then_show_dresser)
     end
     return function()
         level.basket:load(crumple_colors, then_skootch_basket)
@@ -61,6 +65,7 @@ function _level_update(level)
     end
 
     level.basket:update()
+    level.dresser:update()
     level.attention_span:update()
     level.color_wipe:update()
 end
@@ -69,6 +74,7 @@ function _level_draw(level)
     _level_draw_background()
 
     if level.basket then level.basket:draw() end
+    level.dresser:draw()
     level.attention_span:draw()
     level.color_wipe:draw()
 end
