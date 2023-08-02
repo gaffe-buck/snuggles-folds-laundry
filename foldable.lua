@@ -55,7 +55,10 @@ FOLDABLE_SIDE_TOP = "TOP"
 FOLDABLE_SIDE_BOTTOM = "BOTTOM"
 FOLDABLE_SIDE_CENTER = "CENTER"
 
-function make_foldable(article)
+FOLDABLE_RANDOMIZER = LAUNDRY.make_randomizer()
+
+function make_foldable()
+    local article = FOLDABLE_RANDOMIZER:get_random_article()
     local foldable = {}
     foldable.update = _foldable_update
     foldable.draw = _foldable_draw
@@ -95,14 +98,17 @@ function _foldable_update(foldable)
     end
 end
 
-function _foldable_fold(foldable)
+function _foldable_fold(foldable, callback)
     if #foldable.unfolded < 1 then return end
     local fold_tween = {}
     fold_tween.side = foldable.unfolded[1]
     fold_tween.tween = make_simple_tween({
         duration = seconds_to_frames(0.12),
         easing = EASING_FUNCTIONS.EASE_OUT_IN_QUAD,
-        callback = function() del(foldable.fold_tweens, fold_tween) end
+        callback = function()
+            if callback then callback() end
+            del(foldable.fold_tweens, fold_tween) 
+        end
     })
     fold_tween.update = function(self)
         local progress = self.tween:update()

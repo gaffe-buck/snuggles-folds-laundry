@@ -24,7 +24,7 @@ function _test_update(scene)
         scene.foldable:hide()
     end
     if btnp(⬅️) then
-        scene.foldable:fold()
+        scene.foldable:fold(function() printh("did a fold!") end)
     end
 
     scene.foldable:update()

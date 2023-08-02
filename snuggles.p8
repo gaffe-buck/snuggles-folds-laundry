@@ -9,13 +9,13 @@ __lua__
 #include fancy_text.lua
 
 #include game_state.lua
+#include crumple.lua
 #include laundry.lua
 #include foldable.lua
 #include basket.lua
 #include attention_span.lua
 #include title_scene.lua
 #include game_scene.lua
-#include laundry_test_scene.lua
 
 #include main.lua
 __gfx__

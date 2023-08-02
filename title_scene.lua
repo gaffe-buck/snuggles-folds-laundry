@@ -15,7 +15,7 @@ function _title_update(self)
         self.x_pressed = true
         local function callback()
             self.x_pressed = false
-            g_scene = make_level(3, 2)
+            g_scene = make_level(10, 2)
         end
         self.color_wipe:wipe_in(callback)
     end
