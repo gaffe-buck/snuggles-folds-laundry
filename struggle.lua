@@ -38,7 +38,7 @@ function _struggle_update(struggle, btn_press)
         if arrow.pressed and not arrow.tween then del(struggle.arrows, arrow) end
     end
     if btn_press and not pressed_arrow then
-        printh("penalty!! "..#struggle.arrows)
+        printh("penalty!!")
     end
     if #struggle.arrows == 0 and struggle.empty_callback then
         struggle.empty_callback()

@@ -133,14 +133,14 @@ function _foldable_show(foldable, callback)
     foldable.translation_tween = make_translation_tween(tween_config)
 end
 
-function _foldable_hide(foldable)
+function _foldable_hide(foldable, callback)
     local tween_config = {
         target = foldable,
         duration = seconds_to_frames(0.25),
         easing = EASING_FUNCTIONS.EASE_IN_OVERSHOOT,
         start_y = FOLDABLE_END_Y,
         end_y = FOLDABLE_START_Y,
-        -- callback!
+        callback = callback
     }
 
     foldable.translation_tween = make_translation_tween(tween_config)

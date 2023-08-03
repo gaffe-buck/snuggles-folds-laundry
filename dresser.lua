@@ -1,6 +1,9 @@
 DRESSER_START_X = -32
 DRESSER_END_X = 0
 DRESSER_Y = 64 + 16
+FOLDED_THING_X = 9
+FOLDED_THING_START_Y = -8
+FOLDED_THING_END_Y = 96
 
 function make_dresser()
     local dresser = {}
@@ -8,12 +11,33 @@ function make_dresser()
     dresser.draw = _dresser_draw
     dresser.update = _dresser_update
     dresser.show = _dresser_show
+    dresser.put_away = _dresser_put_away
     dresser.tween = nil
-
+    dresser.folded_tween = nil
+    
     dresser.x = DRESSER_START_X
     dresser.y = DRESSER_Y
 
+    dresser.folded_thing = { 
+        x = FOLDED_THING_X,
+        y = FOLDED_THING_START_Y,
+        width = 14,
+        height = 3,
+        color = 0
+    }
     return dresser
+end
+
+function _dresser_put_away(dresser, color)
+    dresser.folded_thing.color = color
+    dresser.folded_tween = make_translation_tween({
+        target = dresser.folded_thing,
+        duration = seconds_to_frames(1),
+        start_x = FOLDED_THING_X,
+        start_y = FOLDED_THING_START_Y,
+        end_y = FOLDED_THING_END_Y,
+        easing = EASING_FUNCTIONS.EASE_IN_QUART
+    })
 end
 
 function _dresser_show(dresser)
@@ -31,6 +55,9 @@ end
 function _dresser_update(dresser)
     if dresser.tween then
         dresser.tween:update()
+    end
+    if dresser.folded_tween then
+        dresser.folded_tween:update()
     end
 end
 
@@ -65,6 +92,22 @@ function _dresser_draw(dresser)
         false)
 
     -- draw folded thing here
+    for i in all({{x=1, y=0},{x=-1, y=0},{x=0, y=1},{x=0, y=-1}}) do
+        rectfill(
+            dresser.folded_thing.x + i.x,
+            dresser.folded_thing.y + i.y,
+            dresser.folded_thing.x + i.x + dresser.folded_thing.width,
+            dresser.folded_thing.y + i.y + dresser.folded_thing.height,
+            5
+        )
+    end
+    rectfill(
+        dresser.folded_thing.x,
+        dresser.folded_thing.y,
+        dresser.folded_thing.x + dresser.folded_thing.width,
+        dresser.folded_thing.y + dresser.folded_thing.height,
+        dresser.folded_thing.color
+    )
 
     sspr( 
         88, 22, 

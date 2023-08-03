@@ -3,6 +3,7 @@ function make_title_scene()
     title_scene.update = _title_update
     title_scene.draw = _title_draw
     title_scene.color_wipe = make_rainbow_wipe()
+    title_scene.color_wipe:wipe_out()
     title_scene.x_pressed = false
 
     return title_scene
@@ -53,8 +54,8 @@ function _title_draw(self)
     })
     
     fancy_text({
-        text = "gaffe 2023 - press ❎ to start",
-        x = 6,
+        text = "gaffe 2023 - press ❎  to start",
+        x = 4,
         y = 128 - 7,
         text_colors = { 10 },
         outline_color = 0
