@@ -1,5 +1,5 @@
 function _init()
-    g_scene = make_level(10, 2) --make_title_scene()
+    g_scene = make_level() --make_title_scene()
 end
 
 function _update60()

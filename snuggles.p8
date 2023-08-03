@@ -8,6 +8,7 @@ __lua__
 #include rainbow_wipe.lua
 #include fancy_text.lua
 
+#include struggle.lua
 #include dresser.lua
 #include crumple.lua
 #include laundry.lua

@@ -14,7 +14,7 @@ function make_crumple(basket, color, callback)
     crumple.y = -8
     crumple.tween = make_translation_tween({
         target = crumple,
-        duration = seconds_to_frames(0.1),
+        duration = seconds_to_frames(0.15),
         start_x = basket.x + crumple.base_x,
         start_y = -8,
         end_y = basket.y + crumple.base_y,
@@ -35,7 +35,7 @@ function _crumple_pop(crumple, callback)
         start_x = crumple.x,
         start_y = crumple.y,
         end_y = -8,
-        easing = EASING_FUNCTIONS.EASE_OUT_QUART,
+        easing = EASING_FUNCTIONS.EASE_IN_QUART,
         callback = function()
             crumple.tween = nil
             callback()
