@@ -2,13 +2,14 @@ ARROW_UP_Y = -16
 ARROW_DOWN_Y = 24
 ARROWS = {"⬅️", "⬆️", "➡️", "⬇️"}
 
-function make_struggle()
+function make_struggle(penalty_fn)
     local struggle = {}
     struggle.new = _struggle_new
     struggle.update = _struggle_update
     struggle.draw = _struggle_draw
     struggle.arrows = {}
     struggle.empty_callback = nil
+    struggle.penalty_fn = penalty_fn
 
     struggle.active = false
 
@@ -38,7 +39,7 @@ function _struggle_update(struggle, btn_press)
         if arrow.pressed and not arrow.tween then del(struggle.arrows, arrow) end
     end
     if btn_press and not pressed_arrow then
-        printh("penalty!!")
+        struggle.penalty_fn()
     end
     if #struggle.arrows == 0 and struggle.empty_callback then
         struggle.empty_callback()

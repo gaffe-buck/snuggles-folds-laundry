@@ -3,14 +3,34 @@ LEVEL_BACKGROUND_COLOR = 15
 -- max 9 arrows
 LEVEL_DAYS = {
     { 
-        num_foldables = 2, 
+        num_foldables = 5, 
         num_arrows = 1,
-        time_limit_seconds = 30
+        time_limit_seconds = 60,
+        penalty_seconds = 5
     },
     {
-        num_foldables = 5,
+        num_foldables = 7,
         num_arrows = 2,
-        time_limit_seconds = 30
+        time_limit_seconds = 60,
+        penalty_seconds = 1
+    },
+    {
+        num_foldables = 12,
+        num_arrows = 3,
+        time_limit_seconds = 120,
+        penalty_seconds = 1
+    },
+    {
+        num_foldables = 17,
+        num_arrows = 4,
+        time_limit_seconds = 120,
+        penalty_seconds = 0.5
+    },
+    {
+        num_foldables = 21,
+        num_arrows = 5,
+        time_limit_seconds = 180,
+        penalty_seconds = 1
     }
 }
 
@@ -24,14 +44,18 @@ function make_level(day)
     level.status = "dryer's done!"
     level.ready = false
     level.winner = false
-
+    level.loser = false
+    level.start_time = 0
+    level.end_time = 0
+    
     level.foldables = _level_make_foldables(level, level.stage.num_foldables)
     level.struggles = 0
-    level.struggle = make_struggle()
+    level.struggle = make_struggle(function() level.end_time -= level.stage.penalty_seconds end)
     level.attention_span = make_attention_span()
     level.basket = make_basket()
     level.dresser = make_dresser()
     level.color_wipe = make_rainbow_wipe()
+    level.chair = make_chair()
 
     level.color_wipe:wipe_out(_level_wipe_out_callback(level))
 
@@ -73,7 +97,11 @@ function _level_then_load_basket(level)
     end
     function then_skootch_basket_and_dresser()
         level.dresser:show() 
-        level.basket:skootch(function() level.ready = true end)
+        level.basket:skootch(function()
+            level.start_time = t()
+            level.end_time = t() + level.stage.time_limit_seconds 
+            level.ready = true 
+        end)
     end
 
     return load_basket
@@ -102,6 +130,21 @@ function _level_update(level)
             end
         end
         level.color_wipe:wipe_in(then_load_next_level)
+    elseif level.loser and btnp(❎) then
+        level.color_wipe:wipe_in(function() 
+            g_scene = make_title_scene()
+        end)
+    end
+    if level.ready and not level.winner then
+        local attention = ((level.end_time - t()) / level.stage.time_limit_seconds * 100)
+        level.attention_span:set_attention(attention)
+        if attention <= 0 then
+            level.chair:drop()
+            if level.active_foldable then level.active_foldable:hide() end
+            level.loser = true
+            level.ready = false
+            level.status = "got distracted..."
+        end
     end
 
     if level.active_foldable then
@@ -109,7 +152,9 @@ function _level_update(level)
     elseif level.ready then
         _level_next_foldable(level)
     end
+
     level.struggle:update(arrow_press)
+    level.chair:update()
     level.basket:update()
     level.dresser:update()
     level.attention_span:update()
@@ -177,6 +222,8 @@ function _level_draw(level)
 
     level.attention_span:draw()
     
+    level.chair:draw()
+
     if level.winner then
         local big_winner = LEVEL_DAYS[level.day + 1] == nil
         local big_text = big_winner and "you win!" or "yippee!!"
@@ -211,6 +258,29 @@ function _level_draw(level)
             background_color = 7,
             x = 22 + 8,
             y = 64 + 9,
+            bubble_depth = 1,
+        })
+    elseif level.loser then
+        local y = 16
+        fancy_text({
+            text = "the chair wins this time",
+            text_colors = { 0 },
+            background_color = 7,
+            x = 12,
+            y = y,
+            bubble_depth = 1,
+            wiggle = {
+                amp = 1.75,
+                speed = -0.75,
+                offset = 0.125
+            },
+        })
+        fancy_text({
+            text = "press ❎ to restart",
+            text_colors = { 0 },
+            background_color = 7,
+            x = 22 + 8,
+            y = y + 9,
             bubble_depth = 1,
         })
     end

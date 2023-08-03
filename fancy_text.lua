@@ -1,17 +1,9 @@
 function fancy_text(config)
     if not config.x then config.x = 0 end
     if not config.y then config.y = 0 end
-    assert(config.text, "missing text")
     if config.bubble_depth then assert(config.background_color, "missing background color") end
     if not config.text_colors then config.text_colors = { 7 } end
-    assert(type(config.text_colors) == "table", "text_colors must be a table")
-    if config.wiggle then
-        assert(config.wiggle.amp
-            and config.wiggle.speed
-            and config.wiggle.offset,
-            "missing wiggle.amp or wiggle.speed or wiggle.offset")
-    end
-
+    
     if not config.letter_width then
         if config.big then
             config.letter_width = 8
@@ -21,12 +13,12 @@ function fancy_text(config)
     end
 
     local WHITE = 7
-    local BACKGROUND_Y_OFFSET = 2
-    local BACKGROUND_Y_HEIGHT = 6
+    local BG_Y_OFFSET = 2
+    local BG_Y_H = 6
     local background_x_offset = config.letter_width - 2
     if config.big then
-        BACKGROUND_Y_OFFSET = 3
-        BACKGROUND_Y_HEIGHT = 12
+        BG_Y_OFFSET = 3
+        BG_Y_H = 12
         background_x_offset = config.letter_width - 5
     end
     local letters_count = #config.text
@@ -55,24 +47,24 @@ function fancy_text(config)
     if config.background_color then
         rectfill(
             config.x - background_x_offset,
-            config.y - BACKGROUND_Y_OFFSET,
+            config.y - BG_Y_OFFSET,
             config.x + letters_count * config.letter_width,
-            config.y + BACKGROUND_Y_HEIGHT,
+            config.y + BG_Y_H,
             config.background_color)
 
         if config.bubble_depth then
             for i = 1, config.bubble_depth do
                 rectfill(
                     config.x - background_x_offset - i,
-                    config.y - BACKGROUND_Y_OFFSET + i,
+                    config.y - BG_Y_OFFSET + i,
                     config.x + letters_count * config.letter_width + i,
-                    config.y + BACKGROUND_Y_HEIGHT - i,
+                    config.y + BG_Y_H - i,
                     config.background_color)
                 rectfill(
                     config.x - background_x_offset + i,
-                    config.y - BACKGROUND_Y_OFFSET - i,
+                    config.y - BG_Y_OFFSET - i,
                     config.x + letters_count * config.letter_width - i,
-                    config.y + BACKGROUND_Y_HEIGHT + i,
+                    config.y + BG_Y_H + i,
                     config.background_color)
             end
         end
