@@ -5,26 +5,26 @@ ATTN_SPAN_EMPTY_FUNCTION = function() end
 AS_X = 12
 AS_SHOWN_Y = 116
 AS_HIDDEN_Y = 129
-AS_BAR_MAX_WIDTH = 100
-AS_BAR_X_OFFSET = 1
-AS_BAR_Y_OFFSET = 6
-AS_BAR_HEIGHT = 2
-AS_BOX_HEIGHT = 9
-AS_BOX_WIDTH = 102
+AS_BAR_MAX_W = 100
+AS_BAR_X_OS = 1
+AS_BAR_Y_OS = 6
+AS_BAR_H = 2
+AS_BOX_H = 9
+AS_BOX_W = 102
 
 -- colors
-AS_BAR_COLOR = 8
-AS_EMPTY_BAR_COLOR = 13
-AS_BACKGROUND_COLOR = 6
-AS_TEXT_COLOR = 5
+AS_BAR_CLR = 8
+AS_EMPTY_BAR_CLR = 13
+AS_BACKGROUND_CLR = 6
+AS_TEXT_CLR = 5
 
 -- timing
-AS_SHOW_DURATION = 0.5
-AS_FILL_DURATION = 0.75
+AS_SHOW_DUR = 0.5
+AS_FILL_DUR = 0.75
 
 -- physics
-AS_DEAD_PIP_INITIAL_Y_VELOCITY = -1.5
-AS_DEAD_PIP_GRAVITY = 0.25
+AS_DEAD_PIP_INIT_Y_V = -1.5
+AS_DEAD_PIP_GRAV = 0.25
 
 function make_attention_span()
     local as = {}
@@ -51,7 +51,7 @@ function _attention_span_update(self)
     if not self.hidden then
         local subtractor = t() > self.show_time and self.show_time or t()
         local difference = self.show_time - subtractor
-        local completion = difference / AS_SHOW_DURATION
+        local completion = difference / AS_SHOW_DUR
         local complete_offset = AS_HIDDEN_Y - AS_SHOWN_Y
         self.y = AS_SHOWN_Y + (complete_offset * completion)
         if completion == 0 then
@@ -76,20 +76,20 @@ function _attention_span_update(self)
 end
 
 function _attention_span_draw(self)
-    local bar_x = self.x + AS_BAR_X_OFFSET
-    local bar_y = self.y + AS_BAR_Y_OFFSET
-    rectfill(self.x -1, self.y -1, self.x + AS_BOX_WIDTH + 1, self.y + AS_BOX_HEIGHT + 1, AS_TEXT_COLOR)
-    rectfill(self.x -2, self.y, self.x + AS_BOX_WIDTH + 2, self.y + AS_BOX_HEIGHT, AS_TEXT_COLOR)
+    local bar_x = self.x + AS_BAR_X_OS
+    local bar_y = self.y + AS_BAR_Y_OS
+    rectfill(self.x -1, self.y -1, self.x + AS_BOX_W + 1, self.y + AS_BOX_H + 1, AS_TEXT_CLR)
+    rectfill(self.x -2, self.y, self.x + AS_BOX_W + 2, self.y + AS_BOX_H, AS_TEXT_CLR)
 
-    rectfill(self.x, self.y, self.x + AS_BOX_WIDTH, self.y + AS_BOX_HEIGHT, AS_BACKGROUND_COLOR)
-    rectfill(self.x - 1, self.y + 1, self.x + AS_BOX_WIDTH + 1, self.y + AS_BOX_HEIGHT - 1, AS_BACKGROUND_COLOR)
+    rectfill(self.x, self.y, self.x + AS_BOX_W, self.y + AS_BOX_H, AS_BACKGROUND_CLR)
+    rectfill(self.x - 1, self.y + 1, self.x + AS_BOX_W + 1, self.y + AS_BOX_H - 1, AS_BACKGROUND_CLR)
     fillp(▒)
-    rectfill(bar_x, bar_y, bar_x + AS_BAR_MAX_WIDTH, bar_y + AS_BAR_HEIGHT, AS_EMPTY_BAR_COLOR)
+    rectfill(bar_x, bar_y, bar_x + AS_BAR_MAX_W, bar_y + AS_BAR_H, AS_EMPTY_BAR_CLR)
     fillp()
     if self.attention > 0 then
-        rectfill(bar_x, bar_y, bar_x + self.attention, bar_y + AS_BAR_HEIGHT, AS_BAR_COLOR)
+        rectfill(bar_x, bar_y, bar_x + self.attention, bar_y + AS_BAR_H, AS_BAR_CLR)
     end
-    print("ATTENTION SPAN", self.x + 1, self.y, AS_TEXT_COLOR)
+    print("ATTENTION SPAN", self.x + 1, self.y, AS_TEXT_CLR)
 
     for dead_pip in all(self.dead_pips) do
         dead_pip:draw(self)
@@ -99,11 +99,11 @@ end
 function _attention_span_show(self, callback)
     self.show_callback = callback
     self.hidden = false
-    self.show_time = t() + AS_SHOW_DURATION
+    self.show_time = t() + AS_SHOW_DUR
 end
 
 function _attention_span_activate(self)
-    local delay = AS_FILL_DURATION / 100
+    local delay = AS_FILL_DUR / 100
     for i = 1, 100 do
         add(self.pips, make_pip(1, delay * (i - 1)))
     end
@@ -150,7 +150,7 @@ end
 
 function _dead_pip_update(self)
     self.y += self.velocity_y
-    self.velocity_y += AS_DEAD_PIP_GRAVITY
+    self.velocity_y += AS_DEAD_PIP_GRAV
     if self.y < 128 then
         return true
     else
@@ -159,15 +159,15 @@ function _dead_pip_update(self)
 end
 
 function _dead_pip_draw(self)
-    line(self.x, self.y, self.x, self.y + AS_BAR_HEIGHT, AS_BAR_COLOR)
+    line(self.x, self.y, self.x, self.y + AS_BAR_H, AS_BAR_CLR)
 end
 
 function make_dead_pip(attention_span, x)
     local new_dead_pip = {}
 
-    new_dead_pip.velocity_y = AS_DEAD_PIP_INITIAL_Y_VELOCITY
-    new_dead_pip.x = attention_span.x + x + AS_BAR_X_OFFSET
-    new_dead_pip.y = attention_span.y + AS_BAR_Y_OFFSET
+    new_dead_pip.velocity_y = AS_DEAD_PIP_INIT_Y_V
+    new_dead_pip.x = attention_span.x + x + AS_BAR_X_OS
+    new_dead_pip.y = attention_span.y + AS_BAR_Y_OS
     new_dead_pip.update = _dead_pip_update
     new_dead_pip.draw = _dead_pip_draw
 

@@ -1,7 +1,5 @@
 function make_simple_tween(config)
     local tween = {}
-    assert(config.duration, "no duration specified")
-    assert(config.duration > 1, "duration must be greater than 1 frame")
     
     tween.delay = config.delay or 0
     tween.duration = config.duration
@@ -18,12 +16,7 @@ end
 
 function make_translation_tween(config)
     local tween = {}
-    assert(config.target, "no object to tween")
-    assert(config.target.x, "object has no x prop")
-    assert(config.target.y, "object has no y prop")
-    assert(config.duration, "no duration specified")
-    assert(config.duration > 1, "duration must be greater than 1 frame")
-
+    
     tween.target = config.target
     tween.delay = config.delay or 0
     tween.duration = config.duration

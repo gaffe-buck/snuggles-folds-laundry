@@ -1,9 +1,9 @@
-DRESSER_START_X = -32
-DRESSER_END_X = 0
-DRESSER_Y = 64 + 16
-FOLDED_THING_X = 9
-FOLDED_THING_START_Y = -8
-FOLDED_THING_END_Y = 96
+DRS_START_X = -32
+DRS_END_X = 0
+DRS_Y = 64 + 16
+THG_X = 9
+THG_START_Y = -8
+THG_END_Y = 96
 
 function make_dresser()
     local dresser = {}
@@ -15,12 +15,12 @@ function make_dresser()
     dresser.tween = nil
     dresser.folded_tween = nil
     
-    dresser.x = DRESSER_START_X
-    dresser.y = DRESSER_Y
+    dresser.x = DRS_START_X
+    dresser.y = DRS_Y
 
     dresser.folded_thing = { 
-        x = FOLDED_THING_X,
-        y = FOLDED_THING_START_Y,
+        x = THG_X,
+        y = THG_START_Y,
         width = 14,
         height = 3,
         color = 0
@@ -33,9 +33,9 @@ function _dresser_put_away(dresser, color)
     dresser.folded_tween = make_translation_tween({
         target = dresser.folded_thing,
         duration = seconds_to_frames(1),
-        start_x = FOLDED_THING_X,
-        start_y = FOLDED_THING_START_Y,
-        end_y = FOLDED_THING_END_Y,
+        start_x = THG_X,
+        start_y = THG_START_Y,
+        end_y = THG_END_Y,
         easing = EASING_FUNCTIONS.EASE_IN_QUART
     })
 end
@@ -44,9 +44,9 @@ function _dresser_show(dresser)
     local tween_config = {
         target = dresser,
         duration = seconds_to_frames(0.75),
-        start_x = DRESSER_START_X,
-        end_x = DRESSER_END_X,
-        start_y = DRESSER_Y,
+        start_x = DRS_START_X,
+        end_x = DRS_END_X,
+        start_y = DRS_Y,
         easing = EASING_FUNCTIONS.EASE_OUT_ELASTIC
     }
     dresser.tween = make_translation_tween(tween_config)

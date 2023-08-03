@@ -1,7 +1,6 @@
 function fancy_text(config)
     if not config.x then config.x = 0 end
     if not config.y then config.y = 0 end
-    if config.bubble_depth then assert(config.background_color, "missing background color") end
     if not config.text_colors then config.text_colors = { 7 } end
     
     if not config.letter_width then

@@ -41,17 +41,6 @@ function _color_wipe_draw(wipe)
     end
 end
 
-function _color_wipe_pause(wipe)
-    wipe.paused = not wipe.paused
-    if not wipe.paused then
-        if wipe.reverse then
-            wipe.start_time = t() - (1 - wipe.pct_complete) * wipe.duration
-        else
-            wipe.start_time = t() - wipe.pct_complete * wipe.duration
-        end
-    end
-end
-
 function _color_wipe_in(wipe, callback)
     wipe.in_callback = callback
     wipe.paused = false
@@ -69,14 +58,10 @@ function _color_wipe_out(wipe, callback)
 end
 
 function make_color_wipe(config)
-    if not config.bars then config.bars = 1 end
-    if not config.duration then config.duration = 1 end
-    if not config.colors then config.colors = { 11 } end
-
     local color_wipe = {}
-    color_wipe.duration = config.duration
-    color_wipe.bars = config.bars
-    color_wipe.colors = config.colors
+    color_wipe.duration = config.duration or 1
+    color_wipe.bars = config.bars or 1
+    color_wipe.colors = config.colors or { 11 }
     color_wipe.start_time = nil
     color_wipe.pct_complete = 0
     color_wipe.paused = true
@@ -84,7 +69,6 @@ function make_color_wipe(config)
     color_wipe.draw = _color_wipe_draw
     color_wipe.wipe_in = _color_wipe_in
     color_wipe.wipe_out = _color_wipe_out
-    color_wipe.pause = _color_wipe_pause
 
     return color_wipe
 end
