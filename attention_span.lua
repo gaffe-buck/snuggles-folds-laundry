@@ -48,11 +48,11 @@ function make_attention_span()
 end
 
 function _attention_span_update(self)
-    if self.position_tween then self.position_tween:update() end
-    if self.attention_tween then 
-        local result = self.attention_tween:update() * 100
-        printh("result: " .. result)
-        self.attention = result
+    if self.position_tween then 
+        self.position_tween:update() 
+    end
+    if self.attention_tween then
+        self.attention = self.attention_tween:update() * 100
     end
 end
 
@@ -86,13 +86,11 @@ function _attention_span_show(self, callback)
 end
 
 function _attention_span_activate(self)
-    printh("activated")
     self.attention_tween = make_simple_tween({
         duration = seconds_to_frames(0.75),
         easing = EASING_FUNCTIONS.EASE_OUT_BOUNCE,
         callback = function() 
             self.attention_tween = nil
-            printh("activate callback")
         end
     })
 end
