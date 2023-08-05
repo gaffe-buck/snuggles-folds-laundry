@@ -112,7 +112,7 @@ function _foldable_fold(foldable, callback)
     local fold_tween = {}
     fold_tween.side = foldable.unfolded[1]
     fold_tween.tween = make_simple_tween({
-        duration = seconds_to_frames(0.12),
+        duration = seconds_to_frames(0.066),
         easing = EASING_FUNCTIONS.EASE_OUT_IN_QUAD,
         callback = function()
             if callback then callback() end
@@ -132,7 +132,7 @@ end
 function _foldable_show(foldable, callback)
     local tween_config = {
         target = foldable,
-        duration = seconds_to_frames(0.5),
+        duration = seconds_to_frames(0.33),
         easing = EASING_FUNCTIONS.EASE_OUT_BOUNCE,
         start_y = FL_START_Y,
         end_y = FL_END_Y,

@@ -6,9 +6,11 @@ function make_struggle(penalty_fn)
     struggle.new = _struggle_new
     struggle.update = _struggle_update
     struggle.draw = _struggle_draw
+    struggle.num_arrows = 0
     struggle.arrows = {}
-    -- struggle.empty_callback = nil
+    -- struggle.success_callback = nil
     struggle.penalty_fn = penalty_fn
+    struggle.successes = 0
 
     struggle.active = false
 
@@ -16,8 +18,10 @@ function make_struggle(penalty_fn)
 end
 
 function _struggle_new(struggle, num_arrows, callback)
+    struggle.num_arrows = num_arrows
+    struggle.successes = 0
     struggle.arrows = {}
-    struggle.empty_callback = callback
+    struggle.success_callback = callback
     local width = 14 * num_arrows
     local base_x = 64 - width/2 + 4
 
@@ -40,9 +44,13 @@ function _struggle_update(struggle, btn_press)
     if btn_press and not pressed_arrow then
         struggle.penalty_fn()
     end
-    if #struggle.arrows == 0 and struggle.empty_callback then
-        struggle.empty_callback()
-        struggle.empty_callback = nil
+
+    local success_fraction = (struggle.num_arrows - #struggle.arrows) / struggle.num_arrows
+    local new_successes = flr(success_fraction * 4)
+    local difference = new_successes - struggle.successes
+    struggle.successes = new_successes
+    for i = 1, difference do
+        if struggle.success_callback then struggle.success_callback() end
     end
 end
 

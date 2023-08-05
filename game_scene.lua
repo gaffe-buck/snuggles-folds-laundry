@@ -5,31 +5,31 @@ LEVEL_DAYS = {
     { 
         num_foldables = 5, 
         num_arrows = 1,
-        time_limit_seconds = 60,
+        time_limit_seconds = 30,
         penalty_seconds = 5
     },
     {
         num_foldables = 7,
         num_arrows = 2,
-        time_limit_seconds = 60,
+        time_limit_seconds = 30,
         penalty_seconds = 1
     },
     {
         num_foldables = 12,
         num_arrows = 3,
-        time_limit_seconds = 120,
+        time_limit_seconds = 60,
         penalty_seconds = 1
     },
     {
         num_foldables = 17,
         num_arrows = 4,
-        time_limit_seconds = 120,
-        penalty_seconds = 0.5
+        time_limit_seconds = 60,
+        penalty_seconds = 1
     },
     {
-        num_foldables = 21,
+        num_foldables = 20,
         num_arrows = 5,
-        time_limit_seconds = 180,
+        time_limit_seconds = 60,
         penalty_seconds = 1
     }
 }
@@ -47,6 +47,7 @@ function make_level(day)
     level.loser = false
     level.start_time = 0
     level.end_time = 0
+    -- level.active_foldable = nil
     
     level.foldables = _level_make_foldables(level, level.stage.num_foldables)
     level.struggles = 0
@@ -201,7 +202,7 @@ function _level_struggle_success(level)
     return function()
         level.struggles += 1
         if level.struggles < 4 then
-            level.active_foldable:fold(then_new_struggle)
+            level.active_foldable:fold()
         else
             level.status = "great job!"
             level.active_foldable:fold(then_hide_foldable)
