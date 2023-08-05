@@ -42,6 +42,7 @@ function _struggle_update(struggle, btn_press)
         if arrow.pressed and not arrow.tween then del(struggle.arrows, arrow) end
     end
     if btn_press and not pressed_arrow then
+        sfx(SFX.ARROW_FAIL)
         struggle.penalty_fn()
     end
 
@@ -77,13 +78,17 @@ function make_arrow(index, x, dir)
         start_x = arrow.x,
         start_y = ARROW_UP_Y,
         end_y = ARROW_DOWN_Y,
-        callback = function() arrow.tween = nil end
+        callback = function() 
+            sfx(SFX.NEW_ARROW)
+            arrow.tween = nil 
+        end
     })
 
     return arrow
 end
 
 function _arrow_press(arrow)
+    sfx(SFX.ARROW_SUCCESS)
     arrow.pressed = true
     arrow.tween = make_translation_tween({
         target = arrow,

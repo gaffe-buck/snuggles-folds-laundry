@@ -13,6 +13,7 @@ function _title_update(self)
     self.color_wipe:update()
 
     if btnp(❎) and not self.x_pressed then
+        sfx(SFX.ACKNOWLEDGE)
         self.x_pressed = true
         local function callback()
             self.x_pressed = false

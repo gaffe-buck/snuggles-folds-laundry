@@ -20,6 +20,7 @@ function make_crumple(basket, color, callback)
         end_y = basket.y + crumple.base_y,
         easing = EASING_FUNCTIONS.EASE_IN_QUART,
         callback = function()
+            sfx(SFX.CRUMPLE_DROP)
             crumple.tween = nil
             crumple.load_callback()
         end
@@ -37,6 +38,7 @@ function _crumple_pop(crumple, callback)
         end_y = -8,
         easing = EASING_FUNCTIONS.EASE_IN_QUART,
         callback = function()
+            sfx(SFX.FOLDABLE_SUCCESS)
             crumple.tween = nil
             callback()
         end

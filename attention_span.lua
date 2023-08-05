@@ -86,6 +86,7 @@ function _attention_span_show(self, callback)
 end
 
 function _attention_span_activate(self)
+    sfx(SFX.ATTN_FILL)
     self.attention_tween = make_simple_tween({
         duration = seconds_to_frames(0.75),
         easing = EASING_FUNCTIONS.EASE_OUT_BOUNCE,

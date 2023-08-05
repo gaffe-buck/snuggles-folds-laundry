@@ -1,0 +1,12 @@
+SFX = {
+    ACKNOWLEDGE = 0,
+    NEW_ARROW = 2,
+    ARROW_SUCCESS = 3,
+    ARROW_FAIL = 1,
+    FOLDABLE_SUCCESS = 4,
+    CRUMPLE_DROP = 5,
+    DRESSER_SUCCESS = 6,
+    ATTN_FILL = 7,
+    LVL_SUCCESS = 8,
+    LVL_FAIL = 9
+}

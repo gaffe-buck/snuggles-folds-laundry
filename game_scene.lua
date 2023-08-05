@@ -142,8 +142,10 @@ function _level_update(level)
                 g_scene = make_level(level.day + 1)
             end
         end
+        sfx(0)
         level.color_wipe:wipe_in(then_load_next_level)
     elseif level.loser and btnp(❎) then
+        sfx(0)
         level.color_wipe:wipe_in(function() 
             g_scene = make_title_scene()
         end)
@@ -152,6 +154,7 @@ function _level_update(level)
         local attention = ((level.end_time - t()) / level.stage.time_limit_seconds * 100)
         level.attention_span:set_attention(attention)
         if attention <= 0 then
+            sfx(SFX.LVL_FAIL)
             level.chair:drop()
             if level.active_foldable then level.active_foldable:hide() end
             level.loser = true
@@ -176,6 +179,7 @@ end
 
 function _level_next_foldable(level)
     if #level.foldables == 0 and level.ready then
+        sfx(SFX.LVL_SUCCESS)
         level.status = "you did it <3"
         level.ready = false
         level.winner = true

@@ -36,7 +36,10 @@ function _dresser_put_away(dresser, color)
         start_x = THG_X,
         start_y = THG_START_Y,
         end_y = THG_END_Y,
-        easing = EASING_FUNCTIONS.EASE_IN_QUART
+        easing = EASING_FUNCTIONS.EASE_IN_QUART,
+        callback = function()
+            sfx(SFX.DRESSER_SUCCESS)
+        end
     })
 end
 
