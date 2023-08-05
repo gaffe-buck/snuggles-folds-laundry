@@ -232,17 +232,11 @@ function _foldable_get_sprite_x_offset(side)
 end
 
 function _foldable_get_sprite_y_offset(side)
-    if side == FL_SIDE_LT then
-        return FL_LT_SPR_Y_OS
-    elseif side == FL_SIDE_RT then
-        return FL_RT_SPR_Y_OS
-    elseif side == FL_SIDE_T then
-        return FL_T_SPR_Y_OS
-    elseif side == FL_SIDE_B then
-        return FL_B_SPR_Y_OS
-    elseif side == FL_SIDE_CENTER then
-        return FL_CENTER_SPR_Y_OS
-    end
+    return (side == FL_SIDE_LT and FL_LT_SPR_Y_OS)
+        or (side == FL_SIDE_RT and FL_RT_SPR_Y_OS)
+        or (side == FL_SIDE_T and FL_T_SPR_Y_OS)
+        or (side == FL_SIDE_B and FL_B_SPR_Y_OS)
+        or FL_CENTER_SPR_Y_OS
 end
 
 function _foldable_get_sprite_width(side)
@@ -288,21 +282,15 @@ function _foldable_get_screen_x_offset(side, folded)
 end
 
 function _foldable_get_screen_y_offset(side, folded)
-    if side == FL_SIDE_LT then
-        return FL_LT_SCN_Y_OS
-    elseif side == FL_SIDE_RT then
-        return FL_RT_SCN_Y_OS
-    elseif side == FL_SIDE_T then
-        return ceil(_tween_calc(FL_T_SCN_Y_OS, FL_CENTER_SCN_Y_OS, folded))
-    elseif side == FL_SIDE_B then
-        return FL_B_SCN_Y_OS
-    elseif side == FL_SIDE_CENTER then
-        return FL_CENTER_SCN_Y_OS
-    end
+    return (side == FL_SIDE_LT and FL_LT_SCN_Y_OS)
+        or (side == FL_SIDE_RT and FL_RT_SCN_Y_OS)
+        or (side == FL_SIDE_T and ceil(_tween_calc(FL_T_SCN_Y_OS, FL_CENTER_SCN_Y_OS, folded)))
+        or (side == FL_SIDE_B and FL_B_SCN_Y_OS)
+        or FL_CENTER_SCN_Y_OS
 end
 
 function _foldable_get_screen_width(s, f)
-    local m = (1 - f)
+    local m = 1 - f
     return (s == FL_SIDE_LT and FL_LT_SCN_W * m)
         or (s == FL_SIDE_RT and FL_RT_SCN_W * (1 - f))
         or (s == FL_SIDE_T and FL_T_SCN_W)
@@ -310,16 +298,11 @@ function _foldable_get_screen_width(s, f)
         or FL_CENTER_SCN_W
 end
 
-function _foldable_get_screen_height(side, folded)
-    if side == FL_SIDE_LT then
-        return FL_SCN_H
-    elseif side == FL_SIDE_RT then
-        return FL_SCN_H
-    elseif side == FL_SIDE_T then
-        return FL_T_SCN_H * (1 - folded)
-    elseif side == FL_SIDE_B then
-        return FL_B_SCN_H  * (1 - folded)
-    elseif side == FL_SIDE_CENTER then
-        return FL_CENTER_SCN_H
-    end
+function _foldable_get_screen_height(s, f)
+    local m = 1 - f
+    return (s == FL_SIDE_LT and FL_SCN_H)
+        or (s == FL_SIDE_RT and FL_SCN_H)
+        or (s == FL_SIDE_T and FL_T_SCN_H * m)
+        or (s == FL_SIDE_B and FL_B_SCN_H * m)
+        or FL_CENTER_SCN_H
 end

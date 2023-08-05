@@ -96,6 +96,58 @@ LAUNDRY.ARTICLE_SPRITES = {
     RUFFLE = { id = 20, x = 32, y = 8 }
 }
 
+LAUNDRY.COLOR_SCHEME_RUFFLE = {
+    LAUNDRY.COLORS.GRAY,
+    LAUNDRY.COLORS.WHITE,
+    LAUNDRY.COLORS.RED,
+    LAUNDRY.COLORS.ORANGE,
+    LAUNDRY.COLORS.YELLOW,
+    LAUNDRY.COLORS.L_GREEN,
+    LAUNDRY.COLORS.CYAN,
+    LAUNDRY.COLORS.PURPLE,
+    LAUNDRY.COLORS.PINK,
+}
+LAUNDRY.COLOR_SCHEME_DARK = {
+    LAUNDRY.COLORS.BLACK,
+    LAUNDRY.COLORS.NAVY,
+    LAUNDRY.COLORS.MAROON,
+    LAUNDRY.COLORS.D_GREEN,
+    LAUNDRY.COLORS.BROWN,
+    LAUNDRY.COLORS.D_GRAY,
+    LAUNDRY.COLORS.GRAY,
+    LAUNDRY.COLORS.WHITE,
+    LAUNDRY.COLORS.PURPLE,
+}
+LAUNDRY.COLOR_SCHEME_GARISH = {
+    LAUNDRY.COLORS.BLACK,
+    LAUNDRY.COLORS.NAVY,
+    LAUNDRY.COLORS.MAROON,
+    LAUNDRY.COLORS.D_GREEN,
+    LAUNDRY.COLORS.BROWN,
+    LAUNDRY.COLORS.D_GRAY,
+    LAUNDRY.COLORS.GRAY,
+    LAUNDRY.COLORS.WHITE,
+    LAUNDRY.COLORS.RED,
+    LAUNDRY.COLORS.ORANGE,
+    LAUNDRY.COLORS.YELLOW,
+    LAUNDRY.COLORS.L_GREEN,
+    LAUNDRY.COLORS.CYAN,
+    LAUNDRY.COLORS.PURPLE,
+    LAUNDRY.COLORS.PINK,
+}
+LAUNDRY.COLOR_SCHEME_SKIRT = {
+    LAUNDRY.COLORS.NAVY,
+    LAUNDRY.COLORS.MAROON,
+    LAUNDRY.COLORS.D_GREEN,
+    LAUNDRY.COLORS.WHITE,
+    LAUNDRY.COLORS.RED,
+    LAUNDRY.COLORS.ORANGE,
+    LAUNDRY.COLORS.YELLOW,
+    LAUNDRY.COLORS.L_GREEN,
+    LAUNDRY.COLORS.CYAN,
+    LAUNDRY.COLORS.PURPLE,
+    LAUNDRY.COLORS.PINK,
+}
 LAUNDRY.ARTICLES = {
     {
         sprite = LAUNDRY.ARTICLE_SPRITES.RUFFLE,
@@ -103,31 +155,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.ORANGE,
-                alt = {
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_RUFFLE
             },
             {
                 default = LAUNDRY.COLORS.YELLOW,
-                alt = {
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_RUFFLE
             }
         }
     },
@@ -137,31 +169,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.NAVY,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.PURPLE,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_DARK
             },
             {
                 default = LAUNDRY.COLORS.PURPLE,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.PURPLE,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_DARK
             }
         }
     },
@@ -170,31 +182,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.NAVY,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.PURPLE,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_DARK
             },
             {
                 default = LAUNDRY.COLORS.PURPLE,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.PURPLE,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_DARK
             }
         }
     },
@@ -203,43 +195,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.GRAY,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_GARISH
             },
             {
                 default = LAUNDRY.COLORS.PURPLE,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_GARISH
             }
         }
     },
@@ -249,51 +209,15 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.PINK,
-                alt = {
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_SKIRT
             },
             {
                 default = LAUNDRY.COLORS.MAROON,
-                alt = {
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_SKIRT
             },
             {
                 default = LAUNDRY.COLORS.ORANGE,
-                alt = {
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_SKIRT
             }
         }
     },
@@ -302,31 +226,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.PINK,
-                alt = {
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_RUFFLE
             },
             {
                 default = LAUNDRY.COLORS.MAROON,
-                alt = {
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_RUFFLE
             }
         }
     },
@@ -335,43 +239,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.WHITE,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_GARISH
             },
             {
                 default = LAUNDRY.COLORS.GRAY,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_GARISH
             }
         }
     },
@@ -417,29 +289,11 @@ LAUNDRY.ARTICLES = {
         colors = {
             {
                 default = LAUNDRY.COLORS.WHITE,
-                alt = {
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_RUFFLE
             },
             {
                 default = LAUNDRY.COLORS.GRAY,
-                alt = {
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK,
-                }
+                alt = LAUNDRY.COLOR_SCHEME_RUFFLE
             }
         }
     },
@@ -449,42 +303,11 @@ LAUNDRY.ARTICLES = {
         colors = { 
             {
                 default = LAUNDRY.COLORS.GRAY, 
-                alt = {
-                    LAUNDRY.COLORS.GRAY,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK
-                }
+                alt = LAUNDRY.COLOR_SCHEME_GARISH
             },
             { 
                 default = LAUNDRY.COLORS.WHITE, 
-                alt = {
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.BLACK,
-                    LAUNDRY.COLORS.NAVY,
-                    LAUNDRY.COLORS.MAROON,
-                    LAUNDRY.COLORS.D_GREEN,
-                    LAUNDRY.COLORS.BROWN,
-                    LAUNDRY.COLORS.D_GRAY,
-                    LAUNDRY.COLORS.WHITE,
-                    LAUNDRY.COLORS.RED,
-                    LAUNDRY.COLORS.ORANGE,
-                    LAUNDRY.COLORS.YELLOW,
-                    LAUNDRY.COLORS.L_GREEN,
-                    LAUNDRY.COLORS.CYAN,
-                    LAUNDRY.COLORS.PURPLE,
-                    LAUNDRY.COLORS.PINK
-                }
+                alt = LAUNDRY.COLOR_SCHEME_GARISH
             } 
         }
     }

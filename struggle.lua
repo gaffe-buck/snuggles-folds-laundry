@@ -1,6 +1,5 @@
 ARROW_UP_Y = -16
 ARROW_DOWN_Y = 24
-ARROWS = {"⬅️", "⬆️", "➡️", "⬇️"}
 
 function make_struggle(penalty_fn)
     local struggle = {}
@@ -24,7 +23,7 @@ function _struggle_new(struggle, num_arrows, callback)
 
     for a = 1, num_arrows do
         local x = base_x + ((a - 1) * 14)
-        add(struggle.arrows, make_arrow(a, x, rnd(ARROWS)))
+        add(struggle.arrows, make_arrow(a, x, rnd({"⬅️", "⬆️", "➡️", "⬇️"})))
     end
 end
 
