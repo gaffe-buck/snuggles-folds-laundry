@@ -262,7 +262,7 @@ function _level_draw(level)
             bubble_depth = 1,
         })
     elseif level.loser then
-        local y = 16
+        local y = 24
         fancy_text({
             text = "the chair wins this time",
             text_colors = { 0 },
@@ -295,7 +295,7 @@ function _level_draw_status(level)
         text_colors = {7},
         outline_color = 5,
         x = 2,
-        y = 2,
+        y = 119,
     })
 end
 

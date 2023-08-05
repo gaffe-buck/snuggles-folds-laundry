@@ -3,7 +3,7 @@ ATTN_SPAN_EMPTY_FUNCTION = function() end
 
 -- dimensions
 AS_X = 12
-AS_SHOWN_Y = 10
+AS_SHOWN_Y = 2
 AS_HIDDEN_Y = -20
 AS_BAR_MAX_W = 100
 AS_BAR_X_OS = 1
