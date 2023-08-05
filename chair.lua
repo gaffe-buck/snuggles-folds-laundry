@@ -3,7 +3,7 @@ function make_chair()
     chair.x = 64-32
     chair.y = -66
     chair.end_y = 49
-    chair.tween = nil
+    -- chair.tween = nil
     chair.update = function(self)
         if chair.tween then chair.tween:update() end
     end

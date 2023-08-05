@@ -12,8 +12,8 @@ function make_dresser()
     dresser.update = _dresser_update
     dresser.show = _dresser_show
     dresser.put_away = _dresser_put_away
-    dresser.tween = nil
-    dresser.folded_tween = nil
+    -- dresser.tween = nil
+    -- dresser.folded_tween = nil
     
     dresser.x = DRS_START_X
     dresser.y = DRS_Y

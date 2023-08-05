@@ -8,7 +8,7 @@ function make_struggle(penalty_fn)
     struggle.update = _struggle_update
     struggle.draw = _struggle_draw
     struggle.arrows = {}
-    struggle.empty_callback = nil
+    -- struggle.empty_callback = nil
     struggle.penalty_fn = penalty_fn
 
     struggle.active = false

@@ -20,51 +20,60 @@ FL_T_SPR_Y_OS = 0
 FL_T_SPR_W = 3
 FL_T_SPR_H = 3
 
-FL_RT_SCN_X_OS = 42
-FL_RT_SCN_Y_OS = 0
-FL_RT_SCN_W = 14
-FL_RT_SPR_X_OS = 6
-FL_RT_SPR_Y_OS = 0
-FL_RT_SPR_W = 2
-FL_RT_SPR_H = 8
+FL_RT_SCN_X_OS,  
+FL_RT_SCN_Y_OS,
+FL_RT_SCN_W,
+FL_RT_SPR_X_OS,
+FL_RT_SPR_Y_OS,
+FL_RT_SPR_W,
+FL_RT_SPR_H =
+42, 0, 14, 6, 0, 2, 8
 
-FL_B_SCN_X_OS = 21
-FL_B_SCN_Y_OS = 42
-FL_B_SCN_W = 21
-FL_B_SCN_H = 14
-FL_B_SPR_X_OS = 3
-FL_B_SPR_Y_OS = 6
-FL_B_SPR_W = 3
-FL_B_SPR_H = 2
+FL_B_SCN_X_OS,FL_B_SCN_Y_OS,
+FL_B_SCN_W,
+FL_B_SCN_H,
+FL_B_SPR_X_OS,
+FL_B_SPR_Y_OS,
+FL_B_SPR_W,
+FL_B_SPR_H
+= 21, 42, 21, 14, 3, 6, 3, 2
 
-FL_CENTER_SCN_X_OS = 21
-FL_CENTER_SCN_Y_OS = 21
-FL_CENTER_SCN_W = 21
-FL_CENTER_SCN_H = 21
-FL_CENTER_SPR_X_OS = 3
-FL_CENTER_SPR_Y_OS = 3
-FL_CENTER_SPR_W = 3
-FL_CENTER_SPR_H = 3
+FL_CENTER_SCN_X_OS, 
+FL_CENTER_SCN_Y_OS, 
+FL_CENTER_SCN_W, 
+FL_CENTER_SCN_H, 
+FL_CENTER_SPR_X_OS, 
+FL_CENTER_SPR_Y_OS, 
+FL_CENTER_SPR_W, 
+FL_CENTER_SPR_H
+= 21, 21, 21, 21, 3, 3, 3, 3
 
-FL_LOGO_X_OS = 21
-FL_LOGO_Y_OS = 23
+FL_LOGO_X_OS, FL_LOGO_Y_OS 
+= 21, 23
 
-FL_SIDE_LT = "LT"
-FL_SIDE_RT = "RT"
-FL_SIDE_T = "T"
-FL_SIDE_B = "B"
-FL_SIDE_CENTER = "CENTER"
+FL_SIDE_LT,
+FL_SIDE_RT,
+FL_SIDE_T, 
+FL_SIDE_B, 
+FL_SIDE_CENTER = 
+"LT", "RT", "T", "B", "CENTER"
 
 FL_RANDOMIZER = LAUNDRY.make_randomizer()
 
 function make_foldable()
     local article = FL_RANDOMIZER:get_random_article()
     local foldable = {}
-    foldable.update = _foldable_update
-    foldable.draw = _foldable_draw
-    foldable.show = _foldable_show
-    foldable.hide = _foldable_hide
-    foldable.fold = _foldable_fold
+    foldable.update, 
+    foldable.draw,   
+    foldable.show,   
+    foldable.hide,   
+    foldable.fold 
+    =
+    _foldable_update,
+    _foldable_draw,
+    _foldable_show,
+    _foldable_hide,
+    _foldable_fold
 
     foldable.article = article
     foldable.x = FL_START_X
@@ -82,7 +91,7 @@ function make_foldable()
         [FL_SIDE_B] = 0,
         [FL_SIDE_CENTER] = 0
     }
-    foldable.translation_tween = nil
+    -- foldable.translation_tween = nil
     foldable.fold_tweens = {}
 
     return foldable
@@ -292,18 +301,13 @@ function _foldable_get_screen_y_offset(side, folded)
     end
 end
 
-function _foldable_get_screen_width(side, folded)
-    if side == FL_SIDE_LT then
-        return FL_LT_SCN_W * (1 - folded)
-    elseif side == FL_SIDE_RT then
-        return FL_RT_SCN_W * (1 - folded)
-    elseif side == FL_SIDE_T then
-        return FL_T_SCN_W
-    elseif side == FL_SIDE_B then
-        return FL_B_SCN_W
-    elseif side == FL_SIDE_CENTER then
-        return FL_CENTER_SCN_W
-    end
+function _foldable_get_screen_width(s, f)
+    local m = (1 - f)
+    return (s == FL_SIDE_LT and FL_LT_SCN_W * m)
+        or (s == FL_SIDE_RT and FL_RT_SCN_W * (1 - f))
+        or (s == FL_SIDE_T and FL_T_SCN_W)
+        or (s == FL_SIDE_B and FL_B_SCN_W)
+        or FL_CENTER_SCN_W
 end
 
 function _foldable_get_screen_height(side, folded)

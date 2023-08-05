@@ -62,7 +62,7 @@ function make_color_wipe(config)
     color_wipe.duration = config.duration or 1
     color_wipe.bars = config.bars or 1
     color_wipe.colors = config.colors or { 11 }
-    color_wipe.start_time = nil
+    -- color_wipe.start_time = nil
     color_wipe.pct_complete = 0
     color_wipe.paused = true
     color_wipe.update = _color_wipe_update
