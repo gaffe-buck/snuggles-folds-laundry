@@ -9,28 +9,40 @@ LEVEL_DAYS = {
         penalty_seconds = 5
     },
     {
-        num_foldables = 7,
+        num_foldables = 8,
         num_arrows = 2,
         time_limit_seconds = 30,
-        penalty_seconds = 1
+        penalty_seconds = 5
     },
     {
         num_foldables = 12,
         num_arrows = 3,
         time_limit_seconds = 60,
-        penalty_seconds = 1
+        penalty_seconds = 5
     },
     {
         num_foldables = 17,
-        num_arrows = 4,
+        num_arrows = 3,
         time_limit_seconds = 60,
-        penalty_seconds = 1
+        penalty_seconds = 2
     },
     {
         num_foldables = 20,
-        num_arrows = 5,
-        time_limit_seconds = 60,
+        num_arrows = 4,
+        time_limit_seconds = 90,
         penalty_seconds = 1
+    },
+    {
+        num_foldables = 24,
+        num_arrows = 4,
+        time_limit_seconds = 90,
+        penalty_seconds = 1
+    },
+    {
+        num_foldables = 27,
+        num_arrows = 5,
+        time_limit_seconds = 90,
+        penalty_seconds = 0.5
     }
 }
 
