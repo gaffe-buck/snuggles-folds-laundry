@@ -107,12 +107,10 @@ function _arrow_update(arrow)
 end
 
 function _arrow_draw(arrow)
-    fancy_text({
-        text = arrow.dir.." ",
-        text_colors = {7},
-        bubble_depth = 1,
-        background_color = 14,
-        x = arrow.x,
-        y = arrow.y
-    }) 
+    local sprite = (arrow.dir == "⬅️" or arrow.dir == "➡️") and 6 or 7
+    local flipx = arrow.dir == "➡️" and true or false
+    local flipy = arrow.dir == "⬇️" and true or false
+    circfill(arrow.x + 7, arrow.y, 7, 14)
+    circfill(arrow.x + 7, arrow.y, 6, 7)
+    spr(sprite, arrow.x + 3, arrow.y - 4, 1, 1, flipx, flipy)
 end
