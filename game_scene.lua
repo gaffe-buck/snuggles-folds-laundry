@@ -61,6 +61,7 @@ function make_level(day)
     level.end_time = 0
     -- level.active_foldable = nil
     
+    level.paw = make_paw()
     level.foldables = _level_make_foldables(level, level.stage.num_foldables)
     level.struggles = 0
     level.struggle = make_struggle(function() level.end_time -= level.stage.penalty_seconds end)
@@ -79,7 +80,7 @@ function _level_make_foldables(level, num_foldables)
     local foldables = {}
     
     for i = 1, num_foldables do
-        add(foldables, make_foldable()) 
+        add(foldables, make_foldable(level.paw)) 
     end
     
     return foldables
@@ -163,6 +164,7 @@ function _level_update(level)
         end
     end
 
+    level.paw:update()
     if level.active_foldable then
         level.active_foldable:update()
     elseif level.ready then
@@ -236,6 +238,7 @@ function _level_draw(level)
     level.dresser:draw()
 
     if level.active_foldable then level.active_foldable:draw() end
+    level.paw:draw()
 
     level.attention_span:draw()
     

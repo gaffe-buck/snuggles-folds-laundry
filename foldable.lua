@@ -60,7 +60,7 @@ FL_SIDE_CENTER =
 
 FL_RANDOMIZER = LAUNDRY.make_randomizer()
 
-function make_foldable()
+function make_foldable(paw)
     local article = FL_RANDOMIZER:get_random_article()
     local foldable = {}
     foldable.update, 
@@ -91,6 +91,7 @@ function make_foldable()
         [FL_SIDE_B] = 0,
         [FL_SIDE_CENTER] = 0
     }
+    foldable.paw = paw
     -- foldable.translation_tween = nil
     foldable.fold_tweens = {}
 
@@ -125,6 +126,7 @@ function _foldable_fold(foldable, callback)
 
         return progress
     end
+    foldable.paw:swipe(fold_tween.side)
     del(foldable.unfolded, foldable.unfolded[1])
     add(foldable.fold_tweens, fold_tween)
 end
